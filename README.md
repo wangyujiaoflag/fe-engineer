@@ -70,7 +70,7 @@ pnpm commitizen init cz-conventional-changelog --pnpm --save-dev --save-exact
 ## package.json中就会生成以下代码
 "config": {
   "commitizen": {
-    "path": "./node_modules/cz-conventional-changelog"
+    "path": "cz-conventional-changelog"
   }
 }
 ```
