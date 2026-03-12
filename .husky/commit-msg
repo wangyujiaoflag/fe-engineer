@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+MSG_FILE="$1"
+MSG_CONTENT="$(cat "$MSG_FILE")"
+
+# 如果本次提交的 message 是以 init 开头（init: xxx 或 init(scope): xxx）
+if printf '%s\n' "$MSG_CONTENT" | grep -Eq '^init(\(.+\))?:'; then
+  # 只有在仓库已经有提交（存在 HEAD）时才检查是否重复使用 init
+  if git rev-parse --verify HEAD >/dev/null 2>&1; then
+    if git log --grep='^init(\(.+\))?:' --extended-regexp --oneline | grep -q .; then
+      echo "❌ 提交失败：'init' 提交只能使用一次，仓库中已存在 init 提交。" >&2
+      exit 1
+    fi
+  fi
+fi
+
+# 最后再让 commitlint 校验格式
+npx --no -- commitlint --edit "$1"
