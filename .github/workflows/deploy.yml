@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "master" ]  # 当你推送到 master 分支时触发
+
+# 设置 GITHUB_TOKEN 的权限，允许部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 允许一次只有一个部署任务在运行
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8.6.10  # 保持与你本地一致的版本
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24  # 使用最新的 LTS 版本 Node.js 24
+          cache: pnpm       # 缓存 pnpm 依赖
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4 # 配置 Pages 环境
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build  # 执行构建，生成 dist 文件夹
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'  # 上传构建产物
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build  # 依赖于 build 任务成功完成
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # 将产物部署到 Pages
