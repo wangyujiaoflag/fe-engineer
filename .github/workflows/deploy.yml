@@ -28,7 +28,7 @@ jobs:
           version: 8.6.10  # 保持与你本地一致的版本
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24  # 使用最新的 LTS 版本 Node.js 24
           cache: pnpm       # 缓存 pnpm 依赖
