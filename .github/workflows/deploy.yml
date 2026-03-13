@@ -43,7 +43,7 @@ jobs:
         run: pnpm build  # 执行构建，生成 dist 文件夹
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: './dist'  # 上传构建产物
 
