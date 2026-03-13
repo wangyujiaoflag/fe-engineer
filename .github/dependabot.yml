@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"      # pnpm 也用 npm 生态
+    directory: "/"                # package.json 所在目录
+    schedule:
+      interval: "weekly"          # 每周检查一次
+    ignore:
+      - dependency-name: "vite"   # 忽略 Vite 大版本更新
+        update-types: ["version-update:semver-major"]
+    groups:
+      vite-and-vue:               # vite和vue更新放在同一个PR
+        patterns:
+          - "vite"
+          - "vue"
+  - package-ecosystem: "github-actions"  # 每月检查一次github actions 的 action 版本
+    directory: "/"
+    schedule:
+      interval: "monthly"
