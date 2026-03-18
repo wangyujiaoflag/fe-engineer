@@ -7,6 +7,11 @@
     "dev": "vite",
     "lint": "eslint \"src/**/*.{js,ts,vue}\"",
     "build": "vue-tsc -b && vite build",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
     "preview": "vite preview",
     "prepare": "husky install",
     "cz": "cz"
@@ -21,24 +26,37 @@
     ]
   },
   "dependencies": {
-    "vue": "^3.5.30"
+    "@sentry/tracing": "^7.120.4",
+    "@sentry/vue": "^10.43.0",
+    "axios": "^1.13.6",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.30",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.4.4",
     "@commitlint/config-conventional": "^20.4.4",
     "@types/node": "^24.12.0",
     "@vitejs/plugin-vue": "^6.0.5",
+    "@vitest/coverage-v8": "^4.1.0",
     "@vue/eslint-config-typescript": "^14.7.0",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.9.0",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^10.0.3",
     "eslint-plugin-vue": "^10.8.0",
     "husky": "^9.1.7",
+    "jsdom": "^28.1.0",
     "lint-staged": "^16.3.3",
+    "mockjs": "^1.1.0",
     "prettier": "^3.8.1",
+    "rollup-plugin-visualizer": "^7.0.1",
+    "standard-version": "^9.5.0",
     "typescript": "~5.9.3",
     "vite": "^8.0.0",
+    "vite-plugin-mock": "^3.0.2",
+    "vitest": "^4.1.0",
     "vue-tsc": "^3.2.5"
   },
   "config": {

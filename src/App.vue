@@ -1,7 +1,11 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <HelloWorld />
+  <div class="nav">
+    <router-link to="/">go to home</router-link>
+    <router-link to="/test">go to test</router-link>
+  </div>
+  <div class="container">
+    <router-view></router-view>
+  </div>
 </template>
