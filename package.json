@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@sentry/tracing": "^7.120.4",
-    "@sentry/vue": "^10.43.0",
+    "@sentry/vue": "^10.45.0",
     "axios": "^1.13.6",
     "pinia": "^3.0.4",
     "vue": "^3.5.30",
